@@ -1,0 +1,62 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="KHBC.Core.Device" #>
+<#@ import namespace="KHBC.Core.Extend" #>
+<#@ assembly name="$(SolutionDir)KHBC.Core/Bin/Debug/KHBC.Core.dll" #>
+<#
+	string EventDataCode()
+    {
+		var text = "";
+		string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+		//解决方案目录
+		string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+
+			DeviceConfig Device = null;
+
+		var dc = XmlExtension.LoadXMLFile<DeviceConfig>($"{projectDir}/Document/KHBC.LD.APCM.device.xml");
+		if (dc.IsSuccess)
+		{
+			Device = dc.Data;
+			Device.Recombine();
+		}
+
+		foreach (var d in Device.Devices)
+		{
+			foreach (var p in d.Value.Properties)
+			{
+				var ev = p.Key;
+				var evtName = p.Value.AttrType.ToUpper() + "_" + ev.ToUpper().Replace("[", "_").Replace(",", "_").Replace("]", "");
+				var line =  "";
+				line += $"        /// <summary>\r\n        /// {p.Value.Id}: {p.Value.Name}, Address={p.Value.Address}, Type={p.Value.DataType}, Length={p.Value.Length}\r\n        /// </summary>\r\n";
+				line += $"        public const string {evtName} = \"{ev}\";\r\n";
+				text += line;
+			}
+		}
+
+		return text;
+    }
+
+	var PropertyText = EventDataCode();
+#>
+using KHBC.Core;
+
+namespace KHBC.LD.APCM.Workflow
+{
+	public partial class ApcmDevcieConfig
+	{
+		#region 事件和属性
+<#= PropertyText #>
+		#endregion
+	}
+}

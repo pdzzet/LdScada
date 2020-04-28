@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Template Id="FCCM" Name="发那科CNC" PlantId="A00" AssemblyLineId="A01" DeviceModel="FANUC" IpAddress="192.168.0.1" Port="8193" PollingTime="100">
+    <Address Id="FanucApi" AddressName="FanucApi" DataType="API" />
+    <Property Id="cnc_rddynamic2" Name="CNC动态信息" AddressId="FanucApi" DataType="DICT"/>
+    <Property Id="cnc_rdaxisdata_type1" Name="轴的信息1" AddressId="FanucApi" DataType="DICT"/>
+    <Property Id="cnc_rdaxisdata_type2" Name="轴的信息2" AddressId="FanucApi" DataType="DICT"/>
+    <!--Property Id="cnc_rdaxisdata_type3" Name="轴的信息3" AddressId="FanucApi" DataType="DICT"/-->
+    <Property Id="cnc_rdaxisdata_type4" Name="轴的信息4" AddressId="FanucApi" DataType="DICT"/>
+    <!--Property Id="cnc_rdaxisdata_type5" Name="轴的信息5" AddressId="FanucApi" DataType="DICT"/-->
+  </Template>
+  <Device Id="F01" IpAddress="172.16.71.14" Template="FCCM"/>
+  <Device Id="F02" IpAddress="172.16.71.15" Template="FCCM"/>
+</DeviceConfig>

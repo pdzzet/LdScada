@@ -1,0 +1,43 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SqlSugar" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Web" #>
+<#@ assembly name="$(SolutionDir)Extension/newtonsoft/Newtonsoft.Json.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/sqlsugar/SqlSugar.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/mysql/MySql.Data.dll" #>
+<#
+//当前项目目录
+string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+//解决方案目录
+string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+//获取tt模板目录
+string templateFileDir = Path.GetDirectoryName(Host.TemplateFile);
+var db = new SqlSugarClient(new ConnectionConfig()
+{
+	ConnectionString = "server=192.168.3.222;Database=ldbcsys;Uid=ldbcsys;Pwd=ldbcsys",
+    DbType = DbType.MySql,
+    IsAutoCloseConnection = true
+});
+
+db.DbFirst
+.Where(t => t.ToUpper().StartsWith("SYS_"))
+.SettingNamespaceTemplate(old =>
+{
+    return old + @"using KHBC.Core;
+";
+})
+.SettingClassTemplate(old => 
+{
+	return "{using}\r\nnamespace {Namespace}\r\n{\r\n{ClassDescription}{SugarTable}\r\n    [SqlSugar.SugarTable(\"{ClassName}\")]\r\n    public class TBL_{ClassName} : BaseEntity\r\n	{\r\n{PropertyName}\r\n    }\r\n}\r\n";
+})
+.CreateClassFile(templateFileDir+"\\BcSysModels","KHBC.LD.BWSI.BcSysModels");    
+#>

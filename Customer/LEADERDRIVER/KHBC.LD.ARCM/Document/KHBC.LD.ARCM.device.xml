@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Template Id="ARCM" Name="遨博机器人" PlantId="A00" AssemblyLineId="A01" DeviceModel="AUBO-i10" Port="8899" PollingTime="100">
+        <Address Id="API" AddressName="AuboRobotAPI" DataType="API" />
+        <Property Id="MaxJointVelc" Name="六个关节轴动的最大速度" AddressId="API" DataType="DICT"/>
+        <Property Id="MaxJointAcc" Name="六个关节轴动的最大加速度" AddressId="API" DataType="DICT"/>
+        <Property Id="MaxLineAcc" Name="机械臂末端最大线加速度" AddressId="API" DataType="DICT"/>
+        <Property Id="MaxLinVelc" Name="机械臂末端最大线速度" AddressId="API" DataType="DICT"/>
+        <Property Id="MaxAngleAcc" Name="机械臂末端最大角加速度" AddressId="API" DataType="DICT"/>
+        <Property Id="MaxAngleVelc" Name="机械臂末端最大角加速度" AddressId="API" DataType="DICT"/>
+        <Property Id="CurrentWaypoint" Name="机械臂当前位置信息" AddressId="API" DataType="DICT"/>
+        <Property Id="ToolPowerType" Name="工具端电源电压类型" AddressId="API" DataType="DICT"/>
+        <Property Id="ToolDynamicsParam" Name="工具的动力学参数" AddressId="API" DataType="DICT"/>
+        <Property Id="ToolKinematicsParam" Name="工具的运动学参数" AddressId="API" DataType="DICT"/>
+        <Property Id="RobotState" Name="机械臂当前状态" AddressId="API" DataType="DICT"/>
+        <Property Id="WorkMode" Name="机械臂服务器当前工作模式" AddressId="API" DataType="DICT"/>
+     </Template>
+     <Device Id="R01" IpAddress="127.0.0.1" Template="ARCM"/>
+</DeviceConfig>

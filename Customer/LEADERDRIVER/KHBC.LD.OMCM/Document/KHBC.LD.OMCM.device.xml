@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Template Id="OMCM" Port="6000" PollingTime="3000">
+    <Address Id="M200" Address="200" DataType="BOOL" Length="44"/>
+    <Address Id="D203" Address="203" DataType="UINT16" Length="1"/>
+    <Property Id="bCycleStart" Name="浸油机联机运行" AddressId="M200" Address="200" DataType="BOOL" Length="1"/>
+    <Property Id="bSysAlarm" Name="系统报警" AddressId="M200" Address="M201" DataType="BOOL" Length="1"/>
+    <Property Id="bEsAlarm" Name="急停" AddressId="M200" Address="M202" DataType="BOOL" Length="1"/>
+    <Property Id="bDoorAlarm" Name="门打开报警" AddressId="M200" Address="M203" DataType="BOOL" Length="1"/>
+    <Property Id="bPushGasAlarm" Name="下压气缸报警" AddressId="M200" Address="M204" DataType="BOOL" Length="1"/>
+    <Property Id="bPlatformGasAlarm" Name="平台气缸报警" AddressId="M200" Address="M205" DataType="BOOL" Length="1"/>
+    <Property Id="bOilPumpOverload" Name="油泵过载" AddressId="M200" Address="M206" DataType="BOOL" Length="1"/>
+    <Property Id="bFanOverload" Name="风机过载" AddressId="M200" Address="M207" DataType="BOOL" Length="1"/>
+    <Property Id="bPosGasAlarm" Name="固定气缸报警" AddressId="M200" Address="M208" DataType="BOOL" Length="1"/>
+    <Property Id="bServoMotorAlarm" Name="伺服电机报警" AddressId="M200" Address="M209" DataType="BOOL" Length="1"/>
+    <Property Id="HighLevelAlarm" Name="高液位报警" AddressId="M200" Address="M210" DataType="BOOL" Length="1"/>
+    <Property Id="LowLevelAlarm" Name="低液位报警" AddressId="M200" Address="M211" DataType="BOOL" Length="1"/>
+    <Property Id="bSPHighLevelAlarm" Name="喷淋高压报警" AddressId="M200" Address="M212" DataType="BOOL" Length="1"/>
+    <Property Id="bCoolingWMachAlarm" Name="冷水机报警" AddressId="M200" Address="M213" DataType="BOOL" Length="1"/>
+    <Property Id="bSkimmingMachAlarm" Name="撇油机报警" AddressId="M200" Address="M214" DataType="BOOL" Length="1"/>
+    <Property Id="bOilHignTAlarm" Name="油温高温报警" AddressId="M200" Address="M215" DataType="BOOL" Length="1"/>
+    <Property Id="A1oad" Name="浸油机有料" AddressId="M200" Address="M216" DataType="BOOL" Length="1"/>
+    <Property Id="bEnaA1eFeeding" Name="浸油机允许取料" AddressId="M200" Address="M218" DataType="BOOL" Length="1"/>
+    <Property Id="bEnaA1eA1anking" Name="浸油机允许放料" AddressId="M200" Address="M219" DataType="BOOL" Length="1"/>
+    <Property Id="bRbIntoClean" Name="机器人进入浸油机" AddressId="M200" Address="M228" DataType="BOOL" Length="1"/>
+    <Property Id="bRbFeedingDone" Name="机器人对浸油机取料完成" AddressId="M200" Address="M229" DataType="BOOL" Length="1"/>
+    <Property Id="bRbA1ankingDone" Name="机器人对浸油机放料完成" AddressId="M200" Address="M230" DataType="BOOL" Length="1"/>
+    <Property Id="wOilT" Name="油温度" AddressId="D203" Address="D203" DataType="UINT16" Length="1"/>
+  </Template>
+  <Device Id="01" Name="R1浸油机" PlantId="A00" AssemblyLineId="A00" DeviceModel="三菱" IpAddress="127.0.0.1" Template="OMCM" />
+</DeviceConfig>

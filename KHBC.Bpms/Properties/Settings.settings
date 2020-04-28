@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KHBC.BPMS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="redis" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">127.0.0.1:6379</Value>
+    </Setting>
+    <Setting Name="line" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">R1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

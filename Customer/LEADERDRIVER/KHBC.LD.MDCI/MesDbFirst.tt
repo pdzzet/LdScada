@@ -1,0 +1,100 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SqlSugar" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Web" #>
+<#@ assembly name="$(SolutionDir)Extension/newtonsoft/Newtonsoft.Json.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/sqlsugar/SqlSugar.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/oracle/Oracle.ManagedDataAccess.dll" #>
+<#
+//当前项目目录
+string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+//解决方案目录
+string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+//获取tt模板目录
+string templateFileDir = Path.GetDirectoryName(Host.TemplateFile);
+var db = new SqlSugarClient(new ConnectionConfig()
+{
+	ConnectionString = "User ID=LDMES;Password=LDMES;Data Source=(DESCRIPTION = (ADDRESS_LIST= (ADDRESS = (PROTOCOL = TCP)(HOST =192.168.3.18)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME = orcl)))",
+    DbType = DbType.Oracle,
+	InitKeyType = InitKeyType.SystemTable, //初始化主键和自增列信息到ORM的方式
+    IsAutoCloseConnection = true
+});
+
+var codeFirstTableList = new Dictionary<string, string>
+{
+	["BOM"] = "",
+	["BOM_INDEX"] = "",
+	["BTRAY_INFO"] = "BTRAY_INFO",
+	["BTRAY_REQUIREMENT"] = "BTRAY_REQUIREMENT",
+	["BTRAY_REQUIREMENT_WMS"] = "",
+	["CHARGING_STATE"] = "CHARGING_STATE",
+	["EQUIP_STATE"] = "EQUIP_STATE",
+	["FIXTURE_INFO"] = "",
+	["LINE_EXCEPTION_INFO"] = "LINE_EXCEPTION_INFO",
+	["LIQUID_EXCEPTION"] = "LIQUID_EXCEPTION",
+	["LIQUID_SHORT"] = "LIQUID_SHORT",
+	["MBF_DEF_ERESOURCE"] = "",
+	["MES_DISPATCH"] = "MES_DISPATCH",
+	["OP_RES"] = "",
+	["PLAN_ORDER"] = "",
+	["PLAN_ORDER_CONFIRM"] = "",
+	["PLAN_ORDER_MATERIALS"] = "",
+	["PROD_INFO"] = "",
+	["PROD_NO"] = "",
+	["PROD_REPORT"] = "PROD_REPORT",
+	["QUALITY_RESULT"] = "QUALITY_RESULT",
+	["QUALTY_PARA"] = "QUALTY_PARA",
+	["QUALTY_RESULT_INFO"] = "QUALTY_RESULT_INFO",
+	["RES_INFO"] = "",
+	["ROUTE_INDEX"] = "",
+	["ROUTE_OP"] = "",
+	["STRAY_M"] = "STRAY_M",
+	["TOOL_INFO"] = "TOOL_INFO",
+	["TOOL_PARA"] = "TOOL_PARA",
+	["TOOL_REQUEST_DETAILS"] = "",
+	["TOOL_REQUEST_HEADER"] = "TOOL_REQUEST_HEADER",
+	["TOOL_SPARE_INFO"] = "",
+	["TOOL_SPARE_TRANSACTION"] = "",
+	["TOOL_SUPPLIER_INFO"] = "",
+	["WAREHOUSE_INFO"] = "",
+};
+
+foreach (var cft in codeFirstTableList)
+{
+	db.MappingTables.Add(cft.Value, cft.Key);
+}
+
+db.DbFirst
+.Where(t => codeFirstTableList.ContainsKey(t) && codeFirstTableList[t] != "")
+.IsCreateAttribute()
+.IsCreateDefaultValue()
+.SettingClassTemplate(old =>
+{
+	var text = @"using KHBC.Core;
+using SqlSugar;
+using System;
+using System.Collections.Generic;
+
+namespace {Namespace}
+{
+{ClassDescription}{SugarTable}
+	public class TB_{ClassName} : BaseEntity
+	{
+{PropertyName}
+	}
+}
+";
+	return text;
+})
+.CreateClassFile(templateFileDir + "\\MesModels", "KHBC.LD.MDCI.MesModels");
+
+#>

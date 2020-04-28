@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Template Id="CWSM" Name="PLC西门子" PlantId="A00" AssemblyLineId="A00" DeviceModel="PLC西门子:S7-200SMART" IpAddress="127.0.0.1" Port="102" PollingTime="3000">
+        <Address Id="I0" Address="I0" DataType="BYTE" Length="2"/>
+        <Address Id="Q0" Address="Q0" DataType="BYTE" Length="1"/>
+        <Property AttrType="Event" Id="BlowerRunning" Name="风机运行" Descr="0:停止 1:运行" Address="I0.0" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="BlowerException" Name="风机异常" Descr="0:正常 1:故障" Address="I0.1" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterAutoMode" Name="水泵手手动自动" Descr="0:手动 1:自动" Address="I0.2" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterPumpRunning" Name="水泵运行" Descr="0:停止 1:运行" Address="I0.3" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterException" Name="水泵异常" Descr="0:正常 1:故障" Address="I0.4" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterLevelHigh" Name="水位高" Descr="1:水位高" Address="I0.5" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterLevelLow" Name="水位低" Descr="0:无水 1:水位低" Address="I0.6" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="HighPreseAlarm" Name="高效压差高报警" Descr="0:压差正常 1:压差高报警" Address="I0.7" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="FilterAlarm" Name="滤油滤芯压差高报警" Descr="0:压差正常 1:压差高报警" Address="I1.0" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="PreFilterAlarm" Name="初滤压差高报警" Descr="0:压差正常 1:压差高报警" Address="I1.1" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="Mute" Name="静音" Descr="" Address="I1.2" AddressId="I0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="WaterPump" Name="水泵" Descr="" Address="Q0.0" AddressId="Q0" DataType="BIT" Length="1"/>
+        <Property AttrType="Event" Id="Buzzer" Name="蜂鸣器" Descr="" Address="Q0.1" AddressId="Q0" DataType="BIT" Length="1"/>
+     </Template>
+     <Device Id="P01" Template="CWSM"/>
+     <Device Id="P02" Template="CWSM"/>
+     <Device Id="P03" Template="CWSM"/>
+</DeviceConfig>

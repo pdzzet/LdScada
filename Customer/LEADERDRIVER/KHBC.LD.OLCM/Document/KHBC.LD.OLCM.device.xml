@@ -1,0 +1,12 @@
+﻿{
+    "OLCM": [
+        {
+            "DeviceId": "O01",
+            "DeviceName": "OKUMA车床",
+            "DeviceType": "i10",
+            "IpAddress": "172.16.71.17",
+            "NcType": "LATHE",
+            "PollingTime": 3
+        }
+    ]
+}

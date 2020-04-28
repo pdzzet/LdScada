@@ -1,0 +1,48 @@
+﻿<Window x:Class="ProcessTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProcessTool"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" >
+            <Label Content="进程管理" HorizontalAlignment="Center"></Label>
+        </StackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ProcessData}"  IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="进程ID" Width="50" Binding="{Binding ProcessId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="进程名" Width="80" Binding="{Binding ProcessName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="CPU" Width="60" Binding="{Binding CPU}"></DataGridTextColumn>
+                <DataGridTextColumn Header="内存" Width="60" Binding="{Binding Memory}"></DataGridTextColumn>
+                <DataGridTextColumn Header="线程数" Width="50" Binding="{Binding ThreadNum}"></DataGridTextColumn>
+                <DataGridTextColumn Header="线程信息" Width="*" Binding="{Binding ThreadInfos}"></DataGridTextColumn>
+                <DataGridTextColumn Header="状态" Width="40" Binding="{Binding Status}"></DataGridTextColumn>
+                <DataGridTextColumn Header="启动时间" Width="80" Binding="{Binding StartTime}"></DataGridTextColumn>
+                 <DataGridTemplateColumn Header="操作" Width="300">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="10,2" Content="启动" 
+                                        Command="{Binding Path=DataContext.StartCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=SelectedItem}" />
+                                <Button  Margin="10,2"  Content="停止"
+                                        Command="{Binding Path=DataContext.StopCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=SelectedItem}" />
+                                <Button Margin="10,2" Content="重启"
+                                        Command="{Binding Path=DataContext.ReStartCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=SelectedItem}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

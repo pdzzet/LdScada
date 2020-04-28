@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Template Id="CLSM" Name="PLC三菱" PlantId="A00" AssemblyLineId="A00" DeviceModel="Q03UDVCPU" Port="6000" PollingTime="3000">
+        <Address Id="M200" Address="M200" DataType="BOOL" Length="172"/>
+        <Address Id="D130" Address="D130" DataType="FLOAT" Length="28"/>
+    </Template>
+    <Device Id="00" Name="A00供液系统" IpAddress="127.0.0.1" Template="CLSM">
+        <Device Id="01" Name="过滤系统" Template="CLSM">
+            <Property AttrType="Event" Id="M200" Name="1#过滤机走纸液位" Address="M200" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M201" Name="1#过滤机无纸报警开关" Address="M201" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M202" Name="2#过滤机走纸液位" Address="M202" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M203" Name="2#过滤机无纸报警开关" Address="M203" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M204" Name="高液位3" Address="M204" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M205" Name="低液位" Address="M205" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M206" Name="超高液位5" Address="M206" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M207" Name="补液液位6" Address="M207" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M208" Name="供液箱加液液位9" Address="M208" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M209" Name="供液箱高液位8" Address="M209" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M210" Name="供液箱低液位10" Address="M210" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M211" Name="供液箱超高液位11" Address="M211" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M212" Name="旁路压力开关" Address="M212" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M213" Name="气浮压力开关" Address="M213" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M214" Name="输送压力开关" Address="M214" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M300" Name="1#过滤机走纸液位电机" Address="M300" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M301" Name="2#过滤机走纸电机" Address="M301" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M302" Name="1#过滤机进液阀(常开)" Address="M302" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M303" Name="2#过滤机进液阀(常开)" Address="M303" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M304" Name="气浮泵" Address="M304" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M305" Name="气浮进气阀" Address="M305" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M306" Name="旁路过滤泵" Address="M306" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M307" Name="输送泵" Address="M307" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M308" Name="输送泵2" Address="M308" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M309" Name="油水分离泵" Address="M309" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M310" Name="过滤箱底部清理阀1" Address="M310" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M311" Name="过滤箱底部清理阀2" Address="M311" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M312" Name="过滤箱底部清理阀3" Address="M312" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M313" Name="过滤箱底部清理阀4" Address="M313" AddressId="M200" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="02" Name="供液系统" Template="CLSM">
+            <Property AttrType="Event" Id="M216" Name="供液箱超高保护液位12" Address="M216" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M217" Name="供液箱超低液位13" Address="M217" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M218" Name="压力传感器" Address="M218" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property Id="D134" Name="流量传感器" Address="D134" AddressId="D130" DataType="FLOAT" Length="1"/>
+            <Property Id="D130" Name="温度传感器" Address="D130" AddressId="D130" DataType="FLOAT" Length="1"/>
+            <Property AttrType="Event" Id="M316" Name="进液阀（常开）" Address="M316" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M317" Name="冷水机" Address="M317" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M318" Name="高压杀菌装置" Address="M318" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M319" Name="恒压供液泵1" Address="M319" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M320" Name="恒压供液泵2" Address="M320" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M321" Name="供液箱底部清理阀1" Address="M321" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M322" Name="供液箱底部清理阀2" Address="M322" AddressId="M200" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="03" Name="配比系统" Template="CLSM">
+            <Property AttrType="Event" Id="M224" Name="原液桶低液位液位11" Address="M224" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M225" Name="配比箱低液位液位2" Address="M225" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M226" Name="配比箱高液位液位1" Address="M226" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property Id="D140" Name="原液流量计1" Address="D140" AddressId="D130" DataType="FLOAT" Length="1"/>
+            <Property Id="D144" Name="原液流量计2" Address="D144" AddressId="D130" DataType="FLOAT" Length="1"/>
+            <Property Id="D150" Name="自来水流量计" Address="D150" AddressId="D130" DataType="FLOAT" Length="1"/>
+            <Property Id="D154" Name="浓度测试仪" Address="D154" AddressId="D130" DataType="FLOAT" Length="1"/>
+
+            <Property AttrType="Event" Id="M324" Name="原液输送泵" Address="M324" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M325" Name="原液控制阀1" Address="M325" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M326" Name="原液控制阀2" Address="M326" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M327" Name="自来水控制阀1" Address="M327" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M328" Name="自来水控制阀2，" Address="M328" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M329" Name="新液输送泵" Address="M329" AddressId="M200" DataType="BOOL" Length="1"/>
+
+
+        </Device>
+        <Device Id="04" Name="回液泵站1" Template="CLSM">
+            <Property AttrType="Event" Id="M236" Name="CNC高液位111" Address="M236" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M237" Name="CNC高液位121" Address="M237" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M238" Name="CNC高液位131" Address="M238" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M239" Name="CNC高液位141" Address="M239" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M240" Name="CNC高液位151" Address="M240" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M241" Name="CNC高液位161" Address="M241" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M242" Name="CNC低液位112" Address="M242" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M243" Name="CNC低液位122" Address="M243" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M244" Name="CNC低液位132" Address="M244" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M245" Name="CNC低液位142" Address="M245" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M246" Name="CNC低液位152" Address="M246" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M247" Name="CNC低液位162" Address="M247" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M248" Name="泵站高液位191" Address="M248" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M249" Name="泵站低液位192" Address="M249" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M250" Name="泵站超高液位193" Address="M250" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M251" Name="泵站超高报警液位194" Address="M251" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M252" Name="泵站流量开关1" Address="M252" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M336" Name="输送泵11" Address="M336" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M337" Name="输送泵12" Address="M337" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M338" Name="供液阀11（常闭）" Address="M338" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M339" Name="供液阀12（常开）" Address="M339" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M340" Name="管路冲洗阀1" Address="M340" AddressId="M200" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="05" Name="回液泵站2" Template="CLSM">
+            <Property AttrType="Event" Id="M253" Name="CNC高液位201" Address="M253" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M254" Name="CNC高液位211" Address="M254" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M255" Name="CNC高液位221" Address="M255" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M256" Name="CNC高液位231" Address="M256" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M257" Name="CNC高液位241" Address="M257" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M258" Name="CNC低液位212" Address="M258" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M259" Name="CNC低液位222" Address="M259" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M260" Name="CNC低液位232" Address="M260" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M261" Name="CNC低液位242" Address="M261" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M262" Name="泵站高液位291" Address="M262" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M263" Name="泵站低液位292" Address="M263" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M264" Name="泵站超高液位293" Address="M264" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M265" Name="泵站超高报警液位294" Address="M265" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M266" Name="泵站流量开关2" Address="M266" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M354" Name="输送泵21" Address="M354" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M355" Name="输送泵22" Address="M355" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M356" Name="供液阀21（常闭）" Address="M356" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M357" Name="供液阀22（常开）" Address="M357" AddressId="M200" DataType="BOOL" Length="1"/>
+            <Property AttrType="Event" Id="M358" Name="管路冲洗阀2" Address="M358" AddressId="M200" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="06" Name="回液泵站3" Template="CLSM">
+        <Property AttrType="Event" Id="M267" Name="CNC高液位311" Address="M267" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M268" Name="CNC高液位321" Address="M268" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M269" Name="CNC高液位331" Address="M269" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M270" Name="CNC高液位341" Address="M270" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M271" Name="CNC低液位312" Address="M271" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M272" Name="CNC低液位322" Address="M272" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M273" Name="CNC低液位332" Address="M273" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M274" Name="CNC低液位342" Address="M274" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M275" Name="泵站高液位391" Address="M275" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M276" Name="泵站低液位392" Address="M276" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M277" Name="泵站超高液位393" Address="M277" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M278" Name="泵站超高报警液位394" Address="M278" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M279" Name="泵站流量开关3" Address="M279" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M367" Name="输送泵31" Address="M367" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M368" Name="输送泵32" Address="M368" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M369" Name="供液阀31（常闭）" Address="M369" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M370" Name="供液阀32（常开）" Address="M370" AddressId="M200" DataType="BOOL" Length="1"/>
+        <Property AttrType="Event" Id="M371" Name="管路冲洗阀3" Address="M371" AddressId="M200" DataType="BOOL" Length="1"/>
+    </Device>
+    </Device>
+</DeviceConfig>

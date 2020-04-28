@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Template Id="APCM" Name="R1线" PlantId="A00" AssemblyLineId="A01" DeviceModel="汇川PLC" Port="502" PollingTime="1000">
+    <Address AttrType="Event" Id="plc_p1" Address="%MB15000" DataType="BYTE" Length="12"/>
+    <Address AttrType="Event" Id="plc_2902" Address="%MB2902" DataType="BYTE" Length="100"/>
+    <Address AttrType="Event" Id="plc_RfidCp" Address="%MB27753" DataType="BYTE" Length="7"/>
+
+    <Address Id="plc_p1D" Address="%MB15020" DataType="BYTE" Length="3231"/>
+    <Address Id="plc_p2D" Address="%MB18251" DataType="BYTE" Length="1077"/>
+    <Address Id="plc_p4Info" Address="%MB19328" DataType="BYTE" Length="7000"/>
+    <Address Id="plc_p5D" Address="%MB26328" DataType="BYTE" Length="972"/>
+    <Address Id="plc_OpInfo1" Address="%MB27300" DataType="BYTE" Length="216"/>
+    <Address Id="plc_OpInfo2" Address="%MB27516" DataType="BYTE" Length="216"/>
+    <Address Id="plc_SpotCheckD" Address="%MB27732" DataType="BYTE" Length="18"/>
+    <Address Id="plc_NgNum" Address="%MB27750" DataType="BYTE" Length="3"/>
+    <Address Id="scada_p1" Address="%MB30000" DataType="BYTE" Length="1"/>
+    <Address Id="scada_p4" Address="%MB30001" DataType="BYTE" Length="1"/>
+    <Address Id="scada_p4UpD" Address="%MB30003" DataType="BYTE" Length="1077"/>
+    <Address Id="scada_p4SpeD" Address="%MB31080" DataType="BYTE" Length="1077"/>
+    <Address Id="scada_p5" Address="%MB32157" DataType="BYTE" Length="1"/>
+    <Address Id="scada_p5D" Address="%MB32158" DataType="BYTE" Length="900"/>
+    <Address Id="scada_spotReqCheckTask" Address="%MB33058" DataType="BYTE" Length="1"/>
+    <Address Id="scada_endSpeTask" Address="%MB33059" DataType="BYTE" Length="1"/>
+    <Address Id="scada_cncOp" Address="%MB33060" DataType="BYTE" Length="12"/>
+
+
+    <Property AttrType="Event" Id="bP1SnPhLeft" Name="料箱到达一号位" Address="%MB2904.6" AddressId="plc_2902" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p1_AgvCall" Name="正常呼叫AGV" Address="%MB15000.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p1_bAgvChange" Name="上报SCADA换箱操作" Address="%MB15000.1" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p1_bTerOrderTaskCall" Name="订单冻结下料任务" Address="%MB15000.2" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p1_bNullTaskDone" Name="空箱任务执行完成" Address="%MB15000.3" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p1_bEnReadInfo" Name="允许读箱体信息" Address="%MB15000.4" AddressId="plc_p1" DataType="BIT" Length="1" Trigger="1:R:p1_info"/>
+    <Property Id="p1_info" Name="1号位置料箱信息" Address="%MB15020" AddressId="plc_p1D" DataType="BYTE" Length="3231"/>
+    
+    <Property AttrType="Event" Id="bP2SnPh" Name="料箱到达二号位" Address="%MB2906.0" AddressId="plc_2902" DataType="BIT" Length="1"/>
+    <Property Id="p2_WorkBinInfo" Name="2号位一次性料箱初始任务数据" Address="%MB18251" AddressId="plc_p2D" DataType="BYTE" Length="1077"/>
+    <Property AttrType="Event" Id="p2_NumInfo" Name="2号位置取几片" Address="%MB15001" AddressId="plc_p1" DataType="BYTE" Length="1" Trigger="1:R:p2_WorkBinInfo"/>
+    
+    <Property AttrType="Event" Id="p3_NgNullAgvCall" Name="NG空箱任务呼叫" Address="%MB15002.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    
+    <Property AttrType="Event" Id="p4_WorkbinSpeOff" Name="特殊放行关闭指令" Address="%MB15003.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="P4_PlcRxDone" Name="4号位读取4065字节完成" Address="%MB15003.1" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="P4_PlcUpdateDone" Name="4号位置更新0-1075数据完成" Address="%MB15003.2" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="P4_PlcRxDone_Spe" Name="4号位读取4065字节完成(特殊放行）" Address="%MB15003.3" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="P4_PlcUpdateDone_Spe" Name="4号位置更新0-1075数据完成(特殊放行）" Address="%MB15003.4" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p4_ReqPcRead" Name="允许读4号位置RFID所有数据" Address="%MB15003.5" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property Id="P4_NumInfo" Name="4号位置数量" Address="%MB15004" AddressId="plc_p1" DataType="BYTE" Length="1"/>
+    <Property Id="p4_PlcInfo" Name="4号位RFID所有数据" Address="%MB19328" AddressId="plc_p4Info" DataType="BYTE" Length="7000"/>
+    
+    <Property AttrType="Event" Id="p5_bEnScadaReadSpe" Name="允许SCADA读单个箱体信息，用于辨别是否要特殊放行" Address="%MB15005.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p5_SpeTaskDone" Name="特殊放行任务完成" Address="%MB15005.1" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="p5_bEnScadaRead" Name="允许SCADA读所有箱体数据用于生成批次号" Address="%MB15005.2" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property Id="p5_CentInfo" Name="箱体UID，箱体当前批次号" Address="%MB26328" AddressId="plc_p5D" DataType="BYTE" Length="972"/>
+    
+    <Property AttrType="Event" Id="SpeTaskEnd" Name="尾单特殊放行完成" Address="%MB15006.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    
+    <Property Id="Line_OpEnRead1" Name="线体中间允许读OP加工位置" Address="%MB15007" AddressId="plc_p1" DataType="BYTE" Length="2"/>
+    <Property Id="Line_OpEnRead2" Name="线体中间允许读OP备用位" Address="%MB15009" AddressId="plc_p1" DataType="BYTE" Length="1"/>
+    <Property Id="Line_OpInfo1" Name="加工位置序列号" Address="%MB27300" AddressId="plc_OpInfo1" DataType="BYTE" Length="216"/>
+    <Property Id="Line_OpInfo2" Name="备用位置序列号" Address="%MB27516" AddressId="plc_OpInfo2" DataType="BYTE" Length="216"/>
+    <Property AttrType="Event" Id="SpotCheckDone" Name="抽检任务已经产生" Address="%MB15010.0" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="SpotCall" Name="呼叫人工取抽检料" Address="%MB15010.1" AddressId="plc_p1" DataType="BIT" Length="1"/>
+    <Property Id="SpotInfo" Name="当前被抽检的序列号" Address="%MB27732" AddressId="plc_SpotCheckD" DataType="BYTE" Length="18"/>
+    <Property Id="NgNum" Name="NG1呼叫人工" Address="%MB27750" AddressId="plc_NgNum" DataType="BYTE" Length="3"/>
+    <Property AttrType="Event" Id="Thrum_RfidCp[1]" Name="线头上料RFID编码块监控" Address="%MB27753[0].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Thrum_RfidCp[2]" Name="线头上料RFID编码块监控" Address="%MB27753[0].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Thrum_RfidCp[3]" Name="线头上料RFID编码块监控" Address="%MB27753[0].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Thrum_RfidCp[4]" Name="线头上料RFID编码块监控" Address="%MB27753[0].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Hl_RfidCp" Name="线头发料RFID编码块监控" Address="%MB27753[0].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[1,1]" Name="线体中间上料RFID编码块监控[1,1]" Address="%MB27753[0].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[1,2]" Name="线体中间上料RFID编码块监控[1,2]" Address="%MB27753[0].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[1,3]" Name="线体中间上料RFID编码块监控[1,3]" Address="%MB27753[0].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[2,1]" Name="线体中间上料RFID编码块监控[2,1]" Address="%MB27753[1].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[2,2]" Name="线体中间上料RFID编码块监控[2,2]" Address="%MB27753[1].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[2,3]" Name="线体中间上料RFID编码块监控[2,3]" Address="%MB27753[1].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[3,1]" Name="线体中间上料RFID编码块监控[3,1]" Address="%MB27753[1].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[3,2]" Name="线体中间上料RFID编码块监控[3,2]" Address="%MB27753[1].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[3,3]" Name="线体中间上料RFID编码块监控[3,3]" Address="%MB27753[1].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[4,1]" Name="线体中间上料RFID编码块监控[4,1]" Address="%MB27753[1].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[4,2]" Name="线体中间上料RFID编码块监控[4,2]" Address="%MB27753[1].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[4,3]" Name="线体中间上料RFID编码块监控[4,3]" Address="%MB27753[2].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[5,1]" Name="线体中间上料RFID编码块监控[5,1]" Address="%MB27753[2].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[5,2]" Name="线体中间上料RFID编码块监控[5,2]" Address="%MB27753[2].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[5,3]" Name="线体中间上料RFID编码块监控[5,3]" Address="%MB27753[2].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[6,1]" Name="线体中间上料RFID编码块监控[6,1]" Address="%MB27753[2].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[6,2]" Name="线体中间上料RFID编码块监控[6,2]" Address="%MB27753[2].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[6,3]" Name="线体中间上料RFID编码块监控[6,3]" Address="%MB27753[2].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[7,1]" Name="线体中间上料RFID编码块监控[7,1]" Address="%MB27753[2].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[7,2]" Name="线体中间上料RFID编码块监控[7,2]" Address="%MB27753[3].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[7,3]" Name="线体中间上料RFID编码块监控[7,3]" Address="%MB27753[3].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[8,1]" Name="线体中间上料RFID编码块监控[8,1]" Address="%MB27753[3].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[8,2]" Name="线体中间上料RFID编码块监控[8,2]" Address="%MB27753[3].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[8,3]" Name="线体中间上料RFID编码块监控[8,3]" Address="%MB27753[3].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[9,1]" Name="线体中间上料RFID编码块监控[9,1]" Address="%MB27753[3].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[9,2]" Name="线体中间上料RFID编码块监控[9,2]" Address="%MB27753[3].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[9,3]" Name="线体中间上料RFID编码块监控[9,3]" Address="%MB27753[3].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[10,1]" Name="线体中间上料RFID编码块监控[10,1]" Address="%MB27753[4].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[10,2]" Name="线体中间上料RFID编码块监控[10,2]" Address="%MB27753[4].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[10,3]" Name="线体中间上料RFID编码块监控[10,3]" Address="%MB27753[4].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[11,1]" Name="线体中间上料RFID编码块监控[11,1]" Address="%MB27753[4].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[11,2]" Name="线体中间上料RFID编码块监控[11,2]" Address="%MB27753[4].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[11,3]" Name="线体中间上料RFID编码块监控[11,3]" Address="%MB27753[4].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[12,1]" Name="线体中间上料RFID编码块监控[12,1]" Address="%MB27753[4].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[12,2]" Name="线体中间上料RFID编码块监控[12,2]" Address="%MB27753[4].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Cnc_RfidCp[12,3]" Name="线体中间上料RFID编码块监控[12,3]" Address="%MB27753[5].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[1]" Name="线尾巴上料RFID编码块监控1" Address="%MB27753[5].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[2]" Name="线尾巴上料RFID编码块监控2" Address="%MB27753[5].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[3]" Name="线尾巴上料RFID编码块监控3" Address="%MB27753[5].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[4]" Name="线尾巴上料RFID编码块监控4" Address="%MB27753[5].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[5]" Name="线尾巴上料RFID编码块监控5" Address="%MB27753[5].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[6]" Name="线尾巴上料RFID编码块监控6" Address="%MB27753[5].6" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[7]" Name="线尾巴上料RFID编码块监控7" Address="%MB27753[5].7" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[8]" Name="线尾巴上料RFID编码块监控8" Address="%MB27753[6].0" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[9]" Name="线尾巴上料RFID编码块监控9" Address="%MB27753[6].1" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="El_RfidCp[10]" Name="线尾巴上料RFID编码块监控10" Address="%MB27753[6].2" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Ng_RfidCp[1]" Name="NG上料RFID编码块监控1" Address="%MB27753[6].3" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Ng_RfidCp[2]" Name="NG上料RFID编码块监控2" Address="%MB27753[6].4" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Event" Id="Ng_RfidCp[3]" Name="NG上料RFID编码块监控3" Address="%MB27753[6].5" AddressId="plc_RfidCp" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p1_NullTask" Name="空箱任务" Address="%MB30000.0" AddressId="scada_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p1_TerOrder" Name="订单终止" Address="%MB30000.1" AddressId="scada_p1" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_Update" Name="4号位需要更新" Address="%MB30001[0].0" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_NoUpdate" Name="4号位不需要更新" Address="%MB30001[0].1" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_WorkbinSpe" Name="4号位特殊让走的指令(未放满放行）" Address="%MB30001[0].2" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_ReqPlcRx" Name="请求PLC读取数据0-4065" Address="%MB30001[0].3" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_ReqPlcUpdate" Name="请求PLC更新物料号，线体号，MES-总控任务，总控-MES写任务，箱体状态" Address="%MB30001[0].4" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_ReqPlcRx_Spe" Name="特殊放行请求PLC读取数据0-4065" Address="%MB30001[0].5" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_ReqPlcUpdate_Spe" Name="特殊放行请求PLC更新物料号，线体号，MES-总控任务，总控-MES写任务，箱体状态" Address="%MB30001[0].6" AddressId="scada_p4" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p4_UpdateCppInfo" Name="正常需要更新的具体信息字段" Address="%MB30003" AddressId="scada_p4UpD" DataType="BYTE" Length="1077"/>
+    <Property AttrType="Action" Id="p4_SpeCppInfo" Name="特殊放行需要更新的具体信息字段" Address="%MB31080" AddressId="scada_p4SpeD" DataType="BYTE" Length="1077"/>
+    <Property AttrType="Action" Id="p5_SpeTask" Name="5号位特殊放行任务" Address="%MB32157.0" AddressId="scada_p5" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p5_bSpeInfoReadDone" Name="5号位scada数据读取特殊放行完成" Address="%MB32157.1" AddressId="scada_p5" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p5_bScadaWriteDone" Name="5号位SCADA传送数据完成" Address="%MB32157.2" AddressId="scada_p5" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="p5_CentInfo" Name="给新的批次号下发" Address="%MB32158" AddressId="scada_p5D" DataType="BYTE" Length="900"/>
+    <Property AttrType="Action" Id="spotReqCheckTask" Name="请求产生抽检料" Address="%MB33058.0" AddressId="scada_spotReqCheckTask" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="endSpeTask" Name="尾巴特殊放行指令" Address="%MB33059.0" AddressId="scada_endSpeTask" DataType="BIT" Length="1"/>
+    <Property AttrType="Action" Id="cncOp" Name="机台OP，需要实时更新，绝对不能出错" Address="%MB33060" AddressId="scada_cncOp" DataType="BYTE" Length="12"/>
+  </Template>
+  <Device Id="P01" IpAddress="127.0.0.1" Template="APCM"/>
+</DeviceConfig>

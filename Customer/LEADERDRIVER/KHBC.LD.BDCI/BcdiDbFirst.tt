@@ -1,0 +1,73 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SqlSugar" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Web" #>
+<#@ assembly name="$(SolutionDir)Extension/newtonsoft/Newtonsoft.Json.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/sqlsugar/SqlSugar.dll" #>
+<#@ assembly name="$(SolutionDir)Extension/mysql/MySql.Data.dll" #>
+<#
+//当前项目目录
+string projectDir = Host.ResolveAssemblyReference("$(ProjectDir)");
+//解决方案目录
+string solutionDir = Host.ResolveAssemblyReference("$(SolutionDir)");
+//获取tt模板目录
+string templateFileDir = Path.GetDirectoryName(Host.TemplateFile);
+var db = new SqlSugarClient(new ConnectionConfig()
+{
+	ConnectionString = "server=192.168.3.222;Database=ldbcsys;Uid=ldbcsys;Pwd=ldbcsys",
+    DbType = DbType.MySql,
+	InitKeyType = InitKeyType.SystemTable, //初始化主键和自增列信息到ORM的方式
+    IsAutoCloseConnection = true
+});
+
+var codeFirstTableList = new Dictionary<string, string>
+{
+	["DEV_CWSM"] = "CwsmDataInfo",
+	["DEV_CCSM"] = "CcsmDataInfo",
+	["DEV_CLSM"] = "ClsmDataInfo",
+	["DEV_ARCM"] = "ArcmDataInfo",
+	["DEV_FCCM"] = "FccmDataInfo",
+	["DEV_OLCM"] = "OlcmDataInfo",
+	["DEV_ALARM"] = "DeviceAlarm",
+	["DEV_PROPDEF"] = "DevicePropertyDefine",
+	["DEV_CLOG"] = "DeviceCtrlLog",
+};
+
+foreach (var cft in codeFirstTableList)
+{
+	db.MappingTables.Add(cft.Value, cft.Key);
+}
+
+db.DbFirst
+.Where(t => codeFirstTableList.ContainsKey(t))
+.IsCreateAttribute()
+.IsCreateDefaultValue()
+.SettingClassTemplate(old =>
+{
+	var text = @"using KHBC.Core;
+using SqlSugar;
+using System;
+using System.Collections.Generic;
+
+namespace {Namespace}
+{
+{ClassDescription}{SugarTable}
+	public class {ClassName} : BaseEntity
+	{
+{PropertyName}
+	}
+}
+";
+	return text;
+})
+.CreateClassFile(templateFileDir+"\\Models","KHBC.LD.BDCI.Models");
+#>

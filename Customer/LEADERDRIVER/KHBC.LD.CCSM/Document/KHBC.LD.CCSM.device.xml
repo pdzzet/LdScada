@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<DeviceConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">     
+    <Template Id="CCSM" Port="6000" PollingTime="3000">
+        <Address Id="M991" Address="M991" DataType="BOOL" Length="110"/>
+    </Template>
+    <Device Id="00" Name="R1G1线排屑系统" PlantId="A00" AssemblyLineId="A00" DeviceModel="三菱FX5U" IpAddress="127.0.0.1" Template="CCSM">
+        <Property Id="PulseCheck" Name="0.5秒脉冲检测" AddressId="M991" Address="M991" DataType="BOOL" Length="1"/>
+        <Property Id="SysRun" Name="系统运行" AddressId="M991" Address="M992" DataType="BOOL" Length="1"/>
+        <Property Id="SysAlarm" Name="系统报警" AddressId="M991" Address="M993" DataType="BOOL" Length="1"/>
+        
+        <Device Id="01" Name="G11排屑机" AssemblyLineId="A02" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1001" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1002" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1003" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1004" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1005" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="02" Name="G11粉碎机" AssemblyLineId="A02" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1001" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1006" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1007" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1008" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1009" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="03" Name="R11排屑机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1021" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1022" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1023" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1024" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1025" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="04" Name="R12排屑机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1041" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1042" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1043" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1044" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1045" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="05" Name="R12粉碎机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1041" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1046" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1047" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1048" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1049" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="06" Name="R13排屑机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1041" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1061" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1062" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1063" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1064" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="07" Name="R14排屑机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1081" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1082" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1083" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1084" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1085" DataType="BOOL" Length="1"/>
+        </Device>
+        <Device Id="08" Name="R14粉碎机" AssemblyLineId="A01" Template="CCSM">
+            <Property Id="AutoMode" Name="自动模式" AddressId="M991" Address="M1081" DataType="BOOL" Length="1"/>
+            <Property Id="Running" Name="正在运行" AddressId="M991" Address="M1086" DataType="BOOL" Length="1"/>
+            <Property Id="HeatOverload" Name="热继过载" AddressId="M991" Address="M1087" DataType="BOOL" Length="1"/>
+            <Property Id="FlotsamJam" Name="卡料" AddressId="M991" Address="M1088" DataType="BOOL" Length="1"/>
+            <Property Id="StartFail" Name="启动失误" AddressId="M991" Address="M1089" DataType="BOOL" Length="1"/>
+        </Device>
+    </Device>
+</DeviceConfig>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99D13544-D832-426C-A4DB-237C9A686A34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KHBC.Core</RootNamespace>
+    <AssemblyName>KHBC.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="CSRedisCore">
+      <HintPath>..\Extension\redis\CSRedisCore.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Extension\log4j\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Extension\newtonsoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseModels\BaseService.cs" />
+    <Compile Include="BaseModels\BaseStartup.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="DataObject.cs" />
+    <Compile Include="Device\DeviceConfig.cs" />
+    <Compile Include="Device\DeviceHandler.cs" />
+    <Compile Include="Device\IDevice.cs" />
+    <Compile Include="Device\ProcessEQ.cs" />
+    <Compile Include="Enums\ServiceState.cs" />
+    <Compile Include="Extend\DateTimeExtension.cs" />
+    <Compile Include="Extend\ObjectClone.cs" />
+    <Compile Include="Extend\Result.cs" />
+    <Compile Include="Extend\StringExtension.cs" />
+    <Compile Include="Extend\Tree.cs" />
+    <Compile Include="Extend\XmlExtension.cs" />
+    <Compile Include="FrameBase\DependencyAttribute.cs" />
+    <Compile Include="FrameBase\IDbController.cs" />
+    <Compile Include="FrameBase\IDependency.cs" />
+    <Compile Include="FrameBase\IModule.cs" />
+    <Compile Include="FrameBase\IStartup.cs" />
+    <Compile Include="FrameBase\Registrations.cs" />
+    <Compile Include="Helper\IniHelper.cs" />
+    <Compile Include="IActionHandle.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="Interface\IServcie.cs" />
+    <Compile Include="IocAutofacContainer.cs" />
+    <Compile Include="ISysContainer.cs" />
+    <Compile Include="JsonExtension.cs" />
+    <Compile Include="KhQueueClient.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\LoggerMaker.cs" />
+    <Compile Include="MessageDataObject.cs" />
+    <Compile Include="ServiceManager.cs" />
+    <Compile Include="SysConf.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysBootStrapper.cs" />
+    <Compile Include="SysRun.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

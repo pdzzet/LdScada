@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA7DF902-D459-4DAD-8AD1-1193EE8F4002}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KHBC.LD.MDCI</RootNamespace>
+    <AssemblyName>KHBC.LD.MDCI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Build\Debug\Bin\KHBC.LD.MDCI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Build\Release\Bin\KHBC.LD.MDCI\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSRedisCore, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Extension\redis\CSRedisCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Extension\newtonsoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=5.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Extension\sqlsugar\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MesDbController.cs" />
+    <Compile Include="MdciKeyConf.cs" />
+    <Compile Include="MdciService.cs" />
+    <Compile Include="MesDbFirst.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MesDbFirst.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MesModels\BTRAY_INFO.cs" />
+    <Compile Include="MesModels\BTRAY_REQUIREMENT.cs" />
+    <Compile Include="MesModels\CHARGING_STATE.cs" />
+    <Compile Include="MesModels\EQUIP_STATE.cs" />
+    <Compile Include="MesModels\LINE_EXCEPTION_INFO.cs" />
+    <Compile Include="MesModels\LIQUID_EXCEPTION.cs" />
+    <Compile Include="MesModels\LIQUID_SHORT.cs" />
+    <Compile Include="MesModels\MES_DISPATCH.cs" />
+    <Compile Include="MesModels\PROD_REPORT.cs" />
+    <Compile Include="MesModels\QUALITY_RESULT.cs" />
+    <Compile Include="MesModels\QUALTY_PARA.cs" />
+    <Compile Include="MesModels\QUALTY_RESULT_INFO.cs" />
+    <Compile Include="MesModels\STRAY_M.cs" />
+    <Compile Include="MesModels\TOOL_INFO.cs" />
+    <Compile Include="MesModels\TOOL_PARA.cs" />
+    <Compile Include="MesModels\TOOL_REQUEST_HEADER.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\KHBC.Core\KHBC.Core.csproj">
+      <Project>{99d13544-d832-426c-a4db-237c9a686a34}</Project>
+      <Name>KHBC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\KHBC.DataAccess\KHBC.DataAccess.csproj">
+      <Project>{eb64fab8-204e-40d4-b003-feed5d77f1a1}</Project>
+      <Name>KHBC.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MesDbFirst.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MesDbFirst.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy /Y "$(SolutionDir)Extension\sqlsugar\SqlSugar.dll" "$(TargetDir)"
+copy /Y "$(SolutionDir)Extension\oracle\Oracle.ManagedDataAccess.dll" "$(TargetDir)"</PreBuildEvent>
+  </PropertyGroup>
+</Project>
